@@ -5,6 +5,15 @@ services:
     build: .
     image: ssh-mcp-worker:latest                           # 告诉 Docker Compose 使用当前目录下的 Dockerfile 构建镜像
     container_name: ssh-mcp-worker      # 为容器指定一个易于识别的名称
+    environment:                     # 定义环境变量
+      SSH_HOSTNAME: ${SSH_HOSTNAME}
+      SSH_USERNAME: ${SSH_USERNAME}
+      SSH_PASSWORD: ${SSH_PASSWORD}
+      SSH_PRIVATE_KEY_PATH: ${SSH_PRIVATE_KEY_PATH}
+      SSH_PRIVATE_KEY_PASSWORD: ${SSH_PRIVATE_KEY_PASSWORD}
+      SSH_PROXY_HOSTNAME: ${SSH_PROXY_HOSTNAME}
+      SSH_PROXY_PORT: ${SSH_PROXY_PORT}
+
     # ports:                             # 如果你的应用监听端口，需要映射出来
     #   - "5000:5000"                    # 宿主机端口:容器端口 (取消注释以启用)
     # volumes:
