@@ -1,0 +1,24 @@
+version: '3.8' # 建议使用较新的 Docker Compose 版本
+
+services:
+  ssh-mcp-worker:
+    build: .
+    image: ssh-mcp-worker:latest                           # 告诉 Docker Compose 使用当前目录下的 Dockerfile 构建镜像
+    container_name: ssh-mcp-worker      # 为容器指定一个易于识别的名称
+    # ports:                             # 如果你的应用监听端口，需要映射出来
+    #   - "5000:5000"                    # 宿主机端口:容器端口 (取消注释以启用)
+    volumes:
+      # 在生产环境，如果镜像已经包含了所有代码，可以考虑移除此卷挂载以提高安全性。
+      - ./app:/app
+    working_dir: /app                  # 设置容器内的工作目录，与 Dockerfile 中的 WORKDIR 保持一致
+
+    networks:
+      myweb:
+        ipv4_address: 172.18.0.30      # 为该服务在 myweb 网络中分配静态 IP
+    command: ["python", "main.py"] 
+
+networks:
+  myweb:
+    # external: true 表示这个网络在 Docker Compose 启动前已经存在
+    # 如果你还没有创建，请先运行: docker network create myweb --subnet 172.18.0.0/24
+    external: true
