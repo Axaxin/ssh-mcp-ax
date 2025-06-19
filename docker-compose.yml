@@ -7,9 +7,9 @@ services:
     container_name: ssh-mcp-worker      # 为容器指定一个易于识别的名称
     # ports:                             # 如果你的应用监听端口，需要映射出来
     #   - "5000:5000"                    # 宿主机端口:容器端口 (取消注释以启用)
-    volumes:
-      # 在生产环境，如果镜像已经包含了所有代码，可以考虑移除此卷挂载以提高安全性。
-      - ./app:/app
+    # volumes:
+    #   # 在生产环境，如果镜像已经包含了所有代码，可以考虑移除此卷挂载以提高安全性。
+    #   - ./app:/app
     working_dir: /app                  # 设置容器内的工作目录，与 Dockerfile 中的 WORKDIR 保持一致
 
     networks:

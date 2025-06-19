@@ -16,7 +16,7 @@ COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 将整个 'app' 目录下的所有文件复制到容器的 /app 目录
-#COPY app/ .
+COPY app/ .
 
 # 暴露应用程序可能监听的端口
 # 如果你的 Python 应用（例如 Flask）监听特定端口，这里需要声明。
